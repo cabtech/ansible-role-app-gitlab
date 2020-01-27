@@ -1,0 +1,6 @@
+cat << ENDCAT
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh > gitlab-setup-debian.sh
+sudo EXTERNAL_URL="http://core-prd-gitlab00.internal.kingst.one" apt-get install gitlab-ee
+sudo gitlab-ctl reconfigure
+sudo gitlab-ctl start
+ENDCAT

@@ -1,0 +1,66 @@
+---
+- name: 'required packages'
+  apt:
+    name: '{{gitlab_dependencies}}'
+    state: present
+  become: true
+  tags:
+  - gitlab
+  - gitlab-pkg
+  - x-pkg
+
+- name: 'optional packages'
+  apt:
+    name: ['postfix']
+    state: present
+  when: gitlab_smtp_enabled == true
+  become: true
+  tags:
+  - gitlab
+  - gitlab-pkg
+  - x-pkg
+
+- name: 'public key of Gitlab repo = {{gitlab_state}}'
+  apt_key:
+    url: '{{gitlab_gpg_key_url}}'
+    state: '{{gitlab_state}}'
+  become: true
+  tags:
+  - gitlab
+  - gitlab-repo
+
+- name: 'Gitlab package repo list'
+  template:
+    src: repo.j2
+    dest: /etc/apt/sources.list.d/{{gitlab_repo_list}}
+    mode: '0644'
+    owner: root
+    group: root
+  become: true
+  tags:
+  - gitlab
+  - gitlab-repo
+
+- name: 'Package {{gitlab_edition}} = {{gitlab_state}}'
+  apt:
+    name: '{{gitlab_edition}}'
+    state: '{{gitlab_state}}'
+    update_cache: true
+  become: true
+  tags:
+  - gitlab
+  - gitlab-pkg
+  - x-pkg
+
+- name: 'Gitlab config file'
+  template:
+    src: gitlab.rb.j2
+    dest: /etc/gitlab/gitlab.rb
+    mode: '0600'
+    owner: root
+    group: root
+  become: true
+  tags:
+  - gitlab
+  - gitlab-cfg
+...

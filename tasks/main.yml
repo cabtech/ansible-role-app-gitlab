@@ -1,0 +1,8 @@
+---
+- name: 'include ubuntu'
+  include_tasks:
+    file: '{{ct_distro}}.yml'
+    apply:
+      tags: gitlab
+  tags: always
+...

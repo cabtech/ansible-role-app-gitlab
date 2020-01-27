@@ -8,10 +8,10 @@ Installs Gitlab
 ## Required variables
 | name | purpose |
 | ---- | ------- |
+| gitlab_endpoint | FQDN of the server hosting Gitlab |
 
 ## Optional variables
-| name | purpose |
-| ---- | ------- |
+None
 
 ## Defaulted variables
 | name | value | purpose |

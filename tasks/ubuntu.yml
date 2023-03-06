@@ -1,66 +1,55 @@
 ---
-- name: 'required packages'
-  apt:
-    name: '{{gitlab_dependencies}}'
+# --------------------------------
+
+- name: "Required packages"
+  ansible.builtin.apt:
+    name: "{{ gitlab_dependencies }}"
     state: present
   become: true
-  tags:
-  - gitlab
-  - gitlab-pkg
-  - x-pkg
+  tags: ["ct-gitlab"]
 
-- name: 'optional packages'
-  apt:
-    name: ['postfix']
+- name: "Optional packages"
+  ansible.builtin.apt:
+    name: ["postfix"]
     state: present
-  when: gitlab_smtp_enabled == true
+  when: gitlab_smtp_enabled
   become: true
-  tags:
-  - gitlab
-  - gitlab-pkg
-  - x-pkg
+  tags: ["ct-gitlab"]
 
-- name: 'public key of Gitlab repo = {{gitlab_state}}'
-  apt_key:
-    url: '{{gitlab_gpg_key_url}}'
-    state: '{{gitlab_state}}'
+- name: "Public key of Gitlab repo"
+  ansible.builtin.apt_key:
+    url: "{{ gitlab_gpg_key_url }}"
+    state: "{{ gitlab_state }}"
   become: true
-  tags:
-  - gitlab
-  - gitlab-repo
+  tags: ["ct-gitlab"]
 
-- name: 'Gitlab package repo list'
-  template:
-    src: repo.j2
-    dest: /etc/apt/sources.list.d/{{gitlab_repo_list}}
-    mode: '0644'
-    owner: root
+- name: "Gitlab package repo list"
+  ansible.builtin.template:
+    dest: /etc/apt/sources.list.d/{{ gitlab_repo_list }}
     group: root
+    mode: "0644"
+    owner: root
+    src: repo.j2
   become: true
-  tags:
-  - gitlab
-  - gitlab-repo
+  tags: ["ct-gitlab"]
 
-- name: 'Package {{gitlab_edition}} = {{gitlab_state}}'
-  apt:
-    name: '{{gitlab_edition}}'
-    state: '{{gitlab_state}}'
+- name: "Package {{ gitlab_edition }}"
+  ansible.builtin.apt:
+    name: "{{ gitlab_edition }}"
+    state: "{{ gitlab_state }}"
     update_cache: true
   become: true
-  tags:
-  - gitlab
-  - gitlab-pkg
-  - x-pkg
+  tags: ["ct-gitlab"]
 
-- name: 'Gitlab config file'
-  template:
-    src: gitlab.rb.j2
+- name: "Gitlab config file"
+  ansible.builtin.template:
     dest: /etc/gitlab/gitlab.rb
-    mode: '0600'
-    owner: root
     group: root
+    mode: "0600"
+    owner: root
+    src: gitlab.rb.j2
   become: true
-  tags:
-  - gitlab
-  - gitlab-cfg
+  tags: ["ct-gitlab"]
+
+# --------------------------------
 ...

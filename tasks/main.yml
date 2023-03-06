@@ -1,7 +1,7 @@
 ---
-- name: 'include ubuntu'
-  include_tasks:
-    file: '{{ct_distro}}.yml'
+- name: 'Include ubuntu tasks'
+  ansible.builtin.include_tasks:
+    file: '{{ ct_distro }}.yml'
     apply:
       tags: gitlab
   tags: always

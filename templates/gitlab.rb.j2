@@ -3,7 +3,7 @@ external_url "{{ gitlab_endpoint }}"
 {% if gitlab_smtp_enabled %}
 gitlab_rails['smtp_address'] = "{{ gitlab_smtp_endpoint }}"
 gitlab_rails['smtp_authentication'] = "login"
-gitlab_rails['smtp_domain'] = "{{ gitlan_smtp_domain }}"
+gitlab_rails['smtp_domain'] = "{{ gitlab_smtp_domain }}"
 gitlab_rails['smtp_enable'] = true
 gitlab_rails['smtp_enable_starttls_auto'] = true
 gitlab_rails['smtp_openssl_verify_mode'] = "peer"

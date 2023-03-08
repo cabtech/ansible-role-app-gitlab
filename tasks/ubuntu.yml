@@ -33,7 +33,7 @@
   become: true
   tags: ["ct-gitlab"]
 
-- name: "Package {{ gitlab_edition }}"
+- name: "Install Gitlab package"
   ansible.builtin.apt:
     name: "{{ gitlab_edition }}"
     state: "{{ gitlab_state }}"
@@ -42,7 +42,7 @@
   become: true
   tags: ["ct-gitlab"]
 
-- name: "Gitlab config file"
+- name: "Gitlab config file (no_log)"
   ansible.builtin.template:
     dest: /etc/gitlab/gitlab.rb
     group: root

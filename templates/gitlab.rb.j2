@@ -6,9 +6,8 @@ gitlab_rails['smtp_authentication'] = "login"
 gitlab_rails['smtp_domain'] = "{{ gitlab_smtp_domain }}"
 gitlab_rails['smtp_enable'] = true
 gitlab_rails['smtp_enable_starttls_auto'] = true
-gitlab_rails['smtp_openssl_verify_mode'] = "peer"
 gitlab_rails['smtp_password'] = "{{ gitlab_smtp_password }}"
-gitlab_rails['smtp_port'] = 465
+gitlab_rails['smtp_port'] = {{ gitlab_smtp_port }}
 gitlab_rails['smtp_user_name'] = "{{ gitlab_smtp_username }}"
 {% else %}
 gitlab_rails['smtp_enable'] = false

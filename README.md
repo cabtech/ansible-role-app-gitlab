@@ -18,6 +18,7 @@ Installs Gitlab
 | gitlab_install_postfix | Boolean | false | installs Postfix you you can send emails via it |
 | gitlab_letsencrypt_enabled | Boolean | false | if true, set gitlab_letsencrypt_contact_email too |
 | gitlab_smtp_enabled | Boolean | false ||
+| gitlab_smtp_port | integer | 465 ||
 | gitlab_state | string | present | oneOf(absent, present) |
 
 ## Optional variables

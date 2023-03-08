@@ -7,6 +7,7 @@ gitlab_gpg_key_url: "https://packages.gitlab.com/gitlab/gitlab-ee/gpgkey"
 gitlab_install_postfix: false
 gitlab_letsencrypt_enabled: false
 gitlab_smtp_enabled: false
+gitlab_smtp_port: 465
 gitlab_repo_list: gitlab_{{ gitlab_edition }}.list
 gitlab_state: present
 

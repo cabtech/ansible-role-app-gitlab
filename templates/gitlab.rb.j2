@@ -1,5 +1,18 @@
 # MANAGED_BY_ANSIBLE
 external_url "{{ gitlab_endpoint }}"
+{% if gitlab_smtp_enabled %}
+gitlab_rails['smtp_address'] = "{{ gitlab_smtp_endpoint }}"
+gitlab_rails['smtp_authentication'] = "login"
+gitlab_rails['smtp_domain'] = "{{ gitlan_smtp_domain }}"
+gitlab_rails['smtp_enable'] = true
+gitlab_rails['smtp_enable_starttls_auto'] = true
+gitlab_rails['smtp_openssl_verify_mode'] = "peer"
+gitlab_rails['smtp_password'] = "{{ gitlab_smtp_password }}"
+gitlab_rails['smtp_port'] = 465
+gitlab_rails['smtp_user_name'] = "{{ gitlab_smtp_username }}"
+{% else %}
+gitlab_rails['smtp_enable'] = false
+{% endif %}
 {% if gitlab_letsencrypt_enabled %}
 letsencrypt['auto_renew_day_of_month'] = "*/7"
 letsencrypt['auto_renew_hour'] = "12"

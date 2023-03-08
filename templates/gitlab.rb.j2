@@ -1,16 +1,21 @@
 # MANAGED_BY_ANSIBLE
 external_url "{{ gitlab_endpoint }}"
-{% if gitlab_oauth_enabled %}
 #
+{% if gitlab_oauth_enabled %}
+gitlab_rails['omniauth_allow_single_sign_on'] = ['google_oauth2']
+gitlab_rails['omniauth_auto_link_ldap_user'] = true
+gitlab_rails['omniauth_block_auto_created_users'] = true
+gitlab_rails['omniauth_enabled'] = true
 gitlab_rails['omniauth_providers'] = [
   {
     name: "google_oauth2",
-    label: "Google for Yellow",
     app_id: "{{ gitlab_oauth_id }}",
     app_secret: "{{ gitlab_oauth_secret }}",
     args: { access_type: "offline", approval_prompt: "" }
   }
 ]
+{% else %}
+gitlab_rails['omniauth_enabled'] = false
 {% endif %}
 #
 {% if gitlab_smtp_enabled %}

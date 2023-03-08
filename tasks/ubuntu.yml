@@ -8,11 +8,11 @@
   become: true
   tags: ["ct-gitlab"]
 
-- name: "Optional packages"
+- name: "Optional install of Postfix"
   ansible.builtin.apt:
     name: ["postfix"]
     state: present
-  when: gitlab_smtp_enabled
+  when: gitlab_install_postfix
   become: true
   tags: ["ct-gitlab"]
 
@@ -38,6 +38,7 @@
     name: "{{ gitlab_edition }}"
     state: "{{ gitlab_state }}"
     update_cache: true
+  ignore_errors: "{{ ansible_check_mode }}"
   become: true
   tags: ["ct-gitlab"]
 

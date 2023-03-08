@@ -6,14 +6,14 @@ dependencies: []
 galaxy_info:
   author: Tim Short
   description: Role for installing Gitlab
-  galaxy_tags: [cloud, terraform]
+  galaxy_tags: [git, gitlab]
   license: GPL v3
-  role_name: ansible_role_app_gitlab
   min_ansible_version: "2"
   namespace: cabtech
   platforms:
   - name: Ubuntu
     versions: [bionic, focal, jammy]
+  role_name: ansible_role_app_gitlab
 
 # --------------------------------
 ...

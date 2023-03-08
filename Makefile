@@ -1,4 +1,4 @@
-lint: .alint .ylint 
+lint: .ylint .alint
 
 .alint: .config/ansible-lint.yml */*.yml
 	ansible-lint --config-file=.config/ansible-lint.yml

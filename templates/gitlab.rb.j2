@@ -1,5 +1,5 @@
 # MANAGED_BY_ANSIBLE
-external_url '{{ gitlab_endpoint }}'
+external_url "{{ gitlab_endpoint }}"
 {% if gitlab_letsencrypt_enabled %}
 letsencrypt['auto_renew_day_of_month'] = "*/7"
 letsencrypt['auto_renew_hour'] = "12"

@@ -49,6 +49,7 @@
     mode: "0600"
     owner: root
     src: gitlab.rb.j2
+  no_log: true
   notify: HandlerReconfigure
   become: true
   tags: ["ct-gitlab"]

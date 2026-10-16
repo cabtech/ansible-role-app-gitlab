@@ -1,6 +1,7 @@
 ---
 - name: "HandlerReconfigure"
   ansible.builtin.command: /usr/bin/gitlab-ctl reconfigure
+  changed_when: true
   become: true
   tags: ["ct-gitlab"]
 ...

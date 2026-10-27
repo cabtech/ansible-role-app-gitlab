@@ -3,8 +3,8 @@
 
 - name: 'Include Ubuntu tasks'
   ansible.builtin.include_tasks:
-    file: '{{ ct_distro }}.yml'
-  when: ct_distro == "ubuntu"
+    file: '{{ ansible_facts["distribution"] | lower }}.yml'
+  when: ansible_facts['distribution'] == "Ubuntu"
   tags: ["ct-gitlab"]
 
 # --------------------------------
